@@ -19,12 +19,19 @@ If these programs don't work for you (even after the necessary modifications), l
 ## Files
 
 * `hawktalon.py`
-  One of my first demos, based on [a tweet from a friend](https://twitter.com/HawktalonDraws/status/1655717080379916289) which seems to apply here.
-* `weather.py`
-  Your location is gathered as input. Output is a weather summary for today, a weather forecast for the next week, and any currently active weather alerts if applicable.
 
-  (NOTE: Make sure you have a valid `OPENCAGE_API_KEY` and `VISUALCROSSING_API_KEY` defined in `.env`!)
+One of my first demos, based on [a tweet from a friend](https://twitter.com/HawktalonDraws/status/1655717080379916289) which seems to apply here.
+
+* `weather.py`
+
+Your location is gathered as input. Output is a weather summary for today, a weather forecast for the next week, and any currently active weather alerts if applicable.
+
+(NOTE: Make sure you have a valid `OPENCAGE_API_KEY` and `VISUALCROSSING_API_KEY` defined in `.env`!)
+
 * `album.py`
-  Input a [MusicBrainz](https://musicbrainz.org/) _release_ ID (only works with releases!). Output is the information for that release.
+
+Input a [MusicBrainz](https://musicbrainz.org/) _release_ ID (only works with releases!). Output is the information for that release.
+
+---
 
 I also have a file called `printbin.bat`, which prints a file to my printer as raw binary data, either by Bluetooth or by USB controlled with the `Win32Raw` printer class (whichever is available). This is useful for when I've printed to a file, and not my printer for whatever reason.
