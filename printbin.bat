@@ -1,0 +1,1 @@
+@python -c "import socket, sys; from escpos.printer import Win32Raw; from printer import Bluetooth; f=open(sys.argv[1], 'rb'); b=f.read(); f.close(); try:\n\tp=Bluetooth('86:67:7a:b0:fb:5b', port=1, profile='ZJ-5870')\nexcept:\n\tp=Win32Raw(profile='ZJ-5870')\np.open(); p._raw(b); p.close()" %*
