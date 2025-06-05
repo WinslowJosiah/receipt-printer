@@ -8,7 +8,6 @@ from printer.escpos_with_software_columns import EscposWithSoftwareColumns
 escpos.escpos.Escpos = EscposWithSoftwareColumns
 
 from escpos.escpos import Escpos
-from escpos.exceptions import DeviceNotFoundError
 
 
 _DEP_BT = getattr(socket, "AF_BLUETOOTH", None) is not None
@@ -57,7 +56,7 @@ class Bluetooth(Escpos):
         except (OSError, TimeoutError) as e:
             self.device = None
             if raise_not_found:
-                raise DeviceNotFoundError(
+                raise RuntimeError(
                     f"Unable to open Bluetooth printer on "
                     f"{(self.address, self.port)}:"
                     f"\n{e}"

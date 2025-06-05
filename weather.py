@@ -197,10 +197,10 @@ p.ln(3)
 
 # Date / location
 p.set(bold=True)
-p.block_text(datetime.now().strftime("%A, %B %#d, %Y"))
+p.block_text(datetime.now().strftime("%A, %B %#d, %Y"), font="0")
 p.set(bold=False)
 p.ln()
-p.block_text(LOCATION)
+p.block_text(LOCATION, font="0")
 p.ln()
 
 # Weather image (icon + temperature)
@@ -215,14 +215,14 @@ p.ln()
 
 # Weather description
 p.set(double_height=True)
-p.block_text(weather["description"])
-p.set(normal_textsize=True)
+p.block_text(weather["description"], font="0")
+p.set(double_width=False, double_height=False)
 p.ln(2)
 
 # Temperature / "feels like"
-p.block_text(f"Condition: {current_weather['conditions']}")
+p.block_text(f"Condition: {current_weather['conditions']}", font="0")
 p.ln()
-p.block_text(f"Temperature: {temperature_text(current_weather['temp'])}")
+p.block_text(f"Temperature: {temperature_text(current_weather['temp'])}", font="0")
 p.ln()
 p.text(f"Feels like: {temperature_text(current_weather['feelslike'])}")
 p.ln(2)
@@ -232,27 +232,27 @@ p.text(f"High: {temperature_text(todays_weather['tempmax'])}")
 p.ln()
 p.text(f"Low: {temperature_text(todays_weather['tempmin'])}")
 p.ln()
-p.block_text(f"Precip. chance: {round(todays_weather['precipprob'])}%")
+p.block_text(f"Precip. chance: {round(todays_weather['precipprob'])}%", font="0")
 p.ln()
-p.block_text(f"Humidity: {round(todays_weather['humidity'])}%")
+p.block_text(f"Humidity: {round(todays_weather['humidity'])}%", font="0")
 p.ln(2)
 
 # Sunrise / sunset
 sunrise = datetime.fromtimestamp(
     todays_weather["sunriseEpoch"]
 ).strftime("%I:%M %p")
-p.block_text(f"Sunrise: {sunrise}")
+p.block_text(f"Sunrise: {sunrise}", font="0")
 p.ln()
 sunset = datetime.fromtimestamp(
     todays_weather["sunsetEpoch"]
 ).strftime("%I:%M %p")
-p.block_text(f"Sunset: {sunset}")
+p.block_text(f"Sunset: {sunset}", font="0")
 p.ln(4)
 
 # Next 7 days forecast
 p.set(underline=1, double_width=True, double_height=True)
 p.textln("Weather Forecast")
-p.set(underline=0, normal_textsize=True)
+p.set(underline=0, double_width=False, double_height=False)
 p.ln()
 for day in weather["days"]:
     p.set(invert=True)
@@ -262,7 +262,7 @@ for day in weather["days"]:
     p.set(invert=False)
 
     p.set(bold=True)
-    p.block_text(day["description"])
+    p.block_text(day["description"], font="0")
     p.ln(2)
     p.set(bold=False)
 
@@ -277,15 +277,15 @@ alerts = weather.get("alerts", [])
 if alerts:
     p.set(underline=1, double_width=True, double_height=True)
     p.textln("Weather Alerts")
-    p.set(underline=0, normal_textsize=True)
+    p.set(underline=0, double_width=False, double_height=False)
     p.ln()
 
     for alert in alerts:
         p.set(invert=True)
-        p.block_text(alert["event"])
+        p.block_text(alert["event"], font="0")
         p.ln()
         p.set(bold=True, invert=False)
-        p.block_text(alert["headline"])
+        p.block_text(alert["headline"], font="0")
         p.ln()
         p.set(bold=False)
         p.ln()
@@ -293,14 +293,14 @@ if alerts:
         if "\n\n" in description:
             description = re.sub(r"(.)\n(?!\n)", r"\1 ", description)
         for line in description.split("\n"):
-            p.block_text(line)
+            p.block_text(line, font="0")
             p.ln()
         p.ln()
     p.ln(3)
 
 # Generation time
 generated_time = datetime.now().isoformat(sep=" ", timespec="minutes")
-p.block_text(f"Generated: {generated_time}")
+p.block_text(f"Generated: {generated_time}", font="0")
 p.ln()
 
 # Padding

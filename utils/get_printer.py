@@ -7,7 +7,6 @@ from printer.escpos_with_software_columns import EscposWithSoftwareColumns
 escpos.escpos.Escpos = EscposWithSoftwareColumns
 
 from escpos.printer import File
-from escpos.exceptions import DeviceNotFoundError
 
 from printer import Bluetooth
 
@@ -32,7 +31,7 @@ def get_printer(filename: str, file: bool = False):
         printer = Bluetooth("86:67:7a:b0:fb:5b", port=1, profile="ZJ-5870")
         printer.open()
         print("Printing to Bluetooth printer")
-    except (DeviceNotFoundError, RuntimeError):
+    except RuntimeError:
         try:
             printer.close()
         except RuntimeError:

@@ -72,13 +72,14 @@ p.set(double_width=True, double_height=True, align="center")
 p.block_text(
     unidecode(release["title"]),
     columns=font_0_columns // 2,
+    font="0",
 )
 p.ln()
-p.set(normal_textsize=True, align="center")
+p.set(double_width=False, double_height=False, align="center")
 artists = ""
 for artist in release["artist-credit"]:
     artists += artist["name"] + artist["joinphrase"]
-p.block_text(unidecode(artists))
+p.block_text(unidecode(artists), font="0")
 p.ln()
 p.set(align="left")
 p.ln()
@@ -107,14 +108,14 @@ column_aligns = ["right", "left", "left", "right"]
 # Tracklist
 p.set(double_width=True, align="center")
 p.textln("Tracklist")
-p.set(normal_textsize=True, align="left")
+p.set(double_width=False, double_height=False, align="left")
 p.ln()
 for media in release["media"]:
     media_title = media["title"]
     if media_title:
         p.set(double_height=True)
-        p.block_text(unidecode(media_title))
-        p.set(normal_textsize=True)
+        p.block_text(unidecode(media_title), font="0")
+        p.set(double_width=False, double_height=False)
         p.ln(2)
 
     # Tracklist header
@@ -180,25 +181,25 @@ for media in release["media"]:
 # Release information
 p.set(double_width=True, align="center")
 p.textln("Release Info")
-p.set(normal_textsize=True, align="left")
+p.set(double_width=False, double_height=False, align="left")
 p.ln()
 
 # Release date
 release_date = release["release-events"][0]["date"]
 if release_date:
-    p.block_text(f"Released: {release_date}")
+    p.block_text(f"Released: {release_date}", font="0")
     p.ln()
 
 # Release country
 area = release["release-events"][0]["area"]
 if area is not None:
-    p.block_text(f"Country: {area['name']}")
+    p.block_text(f"Country: {area['name']}", font="0")
     p.ln()
 
 # Release format
 release_format = release["media"][0]["format"]
 if release_format is not None:
-    p.block_text(f"Format: {release_format}")
+    p.block_text(f"Format: {release_format}", font="0")
     p.ln()
 
 # Release genre
@@ -208,7 +209,7 @@ genres = sorted(
 )
 if genres:
     genres_str = ", ".join(genre["name"] for genre in genres[:5])
-    p.block_text(f"Genre: {genres_str}")
+    p.block_text(f"Genre: {genres_str}", font="0")
     p.ln()
 
 # Release label
@@ -221,19 +222,19 @@ if label_info:
             continue
         seen_labels.add(label["label"]["id"])
         labels.append(label["label"]["name"])
-    p.block_text(f"Label: {'; '.join(map(unidecode, labels))}")
+    p.block_text(f"Label: {'; '.join(map(unidecode, labels))}", font="0")
     p.ln()
 
 # Release status
 status = release["status"]
 if status is not None:
-    p.block_text(f"Status: {status}")
+    p.block_text(f"Status: {status}", font="0")
     p.ln()
 
 # UPC-A barcode
 if release["barcode"] is not None:
     p.ln()
-    p.barcode(release["barcode"], "UPCA")
+    p.barcode(release["barcode"], "UPC-A")
     p.ln()
 
 # Padding
